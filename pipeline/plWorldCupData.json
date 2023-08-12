@@ -1,0 +1,517 @@
+{
+	"name": "plWorldCupData",
+	"properties": {
+		"activities": [
+			{
+				"name": "cpyWorldCupData",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Host Country",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HostCountry",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Winner",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Winner",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Runners-Up",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RunnersUp",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Third",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Third",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Fourth",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Fourth",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Goals Scored",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GoalsScored",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Qualified Teams",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "QualifiedTeams",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Matches Played",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MatchesPlayed",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "wcSummary",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "pqWorldCups",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "cpyWCMatches",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "cpyWorldCupData",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Year",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Stage",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Stage",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Home Team",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HomeTeam",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Home Goals",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HomeGoals",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Away Goals",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AwayGoals",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Away Team",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AwayTeam",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Win Conditions",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WinConditions",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Host Team",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HostTeam",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "wcMatches",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "pqWCMatches",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "cpyWCInternationalMatches",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "cpyWCMatches",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tournament",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Tournament",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Home Team",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HomeTeam",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Home Goals",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HomeGoals",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Away Goals",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AwayGoals",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Away Team",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AwayTeam",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Win Conditions",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WinConditions",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Home Stadium",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HomeStadium",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "wcInternationalMatches",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "pqWCInternationalMatches",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T19:41:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

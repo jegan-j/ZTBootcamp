@@ -1,0 +1,9 @@
+{
+	"name": "adf-jegan",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "61a9ed2f-7745-4f89-b2bb-03243b2bb88d",
+		"tenantId": "ad0b7821-86ee-46c4-841a-be99da55a98e"
+	}
+}

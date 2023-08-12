@@ -1,0 +1,62 @@
+{
+	"name": "wcInternationalMatches",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "international_matches.csv",
+				"folderPath": "Raw/world_cub_data",
+				"container": "adlcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "Tournament",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "Home Team",
+				"type": "String"
+			},
+			{
+				"name": "Home Goals",
+				"type": "String"
+			},
+			{
+				"name": "Away Goals",
+				"type": "String"
+			},
+			{
+				"name": "Away Team",
+				"type": "String"
+			},
+			{
+				"name": "Win Conditions",
+				"type": "String"
+			},
+			{
+				"name": "Home Stadium",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
